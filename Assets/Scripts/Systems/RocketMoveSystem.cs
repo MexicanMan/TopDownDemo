@@ -22,17 +22,21 @@ namespace Assets.Scripts.Systems
             for (int i = 0; i < len; i++)
             {
                 RocketComponent rocketComponent = rockets[i].GetComponent<RocketComponent>();
+
+                // If rocket's target have been destroyed somehow - destroy rocket too
                 if (rocketComponent.ClosestTarget != null)
                 {
                     Vector3 dir = (rockets[i].GetComponent<RocketComponent>().ClosestTarget.transform.position - rockets[i].transform.position).normalized;
                     float distance = rockets[i].GetComponent<RocketComponent>().Speed * Time.deltaTime;
                     Vector3 newPos = rockets[i].transform.position + dir * distance;
 
+                    // Rotate rocket in the direction to a target
                     Vector3 up = rockets[i].transform.up;
                     float rotateAngle = Vector3.SignedAngle(up, dir, new Vector3(0, 0, 1));
 
                     rockets[i].transform.Rotate(new Vector3(0, 0, 1), rotateAngle);
 
+                    // Check if rocket collide with target
                     RaycastHit2D raycastHit = Physics2D.Raycast(rockets[i].transform.position, dir, distance);
 
                     if (raycastHit.collider == null || !raycastHit.collider.GetComponent<TargetComponent>())
@@ -46,6 +50,7 @@ namespace Assets.Scripts.Systems
                         scoreEntity.GetComponent<ScoreComponent>().Score = 1;
                     }
 
+                    // If rocket is not visible by main camera
                     if (!GeometryUtility.TestPlanesAABB(planes, rockets[i].GetComponent<SpriteRenderer>().bounds))
                         CurrentEntityManager.DestroyEntity(rockets[i]);
                 }

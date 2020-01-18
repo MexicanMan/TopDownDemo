@@ -48,6 +48,7 @@ namespace Assets.Scripts.Systems
                         {
                             var bulletEntity = CurrentEntityManager.CreateEntity("bulletEntity", bulletArchetype);
 
+                            // Bullet moves in the player current direction
                             Vector3 bulletDir = new Vector3(
                                 -Mathf.Sin(Mathf.Deg2Rad * players[j].transform.eulerAngles.z) * players[j].GetComponent<PlayerComponent>().PlayerOffset,
                                 Mathf.Cos(Mathf.Deg2Rad * players[j].transform.eulerAngles.z) * players[j].GetComponent<PlayerComponent>().PlayerOffset);
@@ -77,6 +78,7 @@ namespace Assets.Scripts.Systems
                             var targets = CurrentEntityManager.Entities.Where(e => e.GetComponent<TargetComponent>());
                             if (targets.Count() > 0)
                             {
+                                // Find closest target that rocket will pursue
                                 GameObject closestTarget = targets.First();
                                 foreach (var target in targets)
                                 {

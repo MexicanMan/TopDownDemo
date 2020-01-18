@@ -25,6 +25,7 @@ namespace Assets.Scripts.Systems
                 float distance = bullets[i].GetComponent<BulletComponent>().Speed * Time.deltaTime;
                 Vector3 newPos = bullets[i].transform.position + dir * distance;
 
+                // Check if bullet collide with target
                 RaycastHit2D raycastHit = Physics2D.Raycast(bullets[i].transform.position, dir, distance);
 
                 if (raycastHit.collider == null || !raycastHit.collider.GetComponent<TargetComponent>())
@@ -38,6 +39,7 @@ namespace Assets.Scripts.Systems
                     scoreEntity.GetComponent<ScoreComponent>().Score = 1;
                 }
 
+                // If bullet is not visible by main camera
                 if (!GeometryUtility.TestPlanesAABB(planes, bullets[i].GetComponent<SpriteRenderer>().bounds))
                     CurrentEntityManager.DestroyEntity(bullets[i]);
             }
