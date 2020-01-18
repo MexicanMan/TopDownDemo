@@ -29,8 +29,8 @@ namespace Assets.Scripts.Systems
                     Vector3 newPos = rockets[i].transform.position + dir * distance;
 
                     Vector3 up = rockets[i].transform.up;
-                    float rotateAngle = Mathf.Acos((up.x * dir.x + up.y * dir.y) / 
-                        (Mathf.Sqrt(up.x * up.x + up.y * up.y) * Mathf.Sqrt(dir.x * dir.x + dir.y * dir.y))) * Mathf.Rad2Deg;
+                    float rotateAngle = Vector3.SignedAngle(up, dir, new Vector3(0, 0, 1));
+
                     rockets[i].transform.Rotate(new Vector3(0, 0, 1), rotateAngle);
 
                     RaycastHit2D raycastHit = Physics2D.Raycast(rockets[i].transform.position, dir, distance);

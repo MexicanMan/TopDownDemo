@@ -80,8 +80,8 @@ namespace Assets.Scripts.Systems
                                 GameObject closestTarget = targets.First();
                                 foreach (var target in targets)
                                 {
-                                    if (Distance(closestTarget.transform.position, rocketEntity.transform.position) >
-                                        Distance(target.transform.position, rocketEntity.transform.position))
+                                    if (Vector3.Distance(closestTarget.transform.position, rocketEntity.transform.position) >
+                                        Vector3.Distance(target.transform.position, rocketEntity.transform.position))
                                         closestTarget = target;
                                 }
 
@@ -100,11 +100,6 @@ namespace Assets.Scripts.Systems
         public void OnPostUpdate()
         {
 
-        }
-
-        private float Distance(Vector3 a, Vector3 b)
-        {
-            return Mathf.Sqrt(Mathf.Pow(b.x-a.x, 2) + Mathf.Pow(b.y - a.y, 2) + Mathf.Pow(b.z - a.z, 2));
         }
     }
 }
