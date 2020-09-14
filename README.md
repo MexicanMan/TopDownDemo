@@ -7,4 +7,4 @@
 ![Game process](https://media.giphy.com/media/hrjekFMJZWtZE0NJuu/giphy.gif)
 
 ## Architecture
- This is an attempt to make own simple realisation of ECS pattern with the help of native Unity tools. I use GameObjects itself instead of Entities and Components are MonoBehaviour scripts. Systems and Entities store in EntityManager.
+ This is an attempt to make my own simple realisation of ECS pattern with the help of native Unity tools. I use GameObjects itself instead of Entities and Components are MonoBehaviour scripts. Systems and Entities store in EntityManager.
